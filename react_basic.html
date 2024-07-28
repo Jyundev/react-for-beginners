@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="styleshee" href="style.css" />
+</head>
+
+<body>
+    <div id="root"></div>
+</body>
+<!-- React JS, React DOM import -->
+<!-- React JS - element 생성하고 event listener을 더헤 줌 -->
+<!-- React DOM - element를 HTML로 바꿔 줌-->
+<script src="https://www.unpkg.com/react@18.3.1/umd/react.production.min.js"></script> 
+<script src="https://unpkg.com/react-dom@18.3.1/umd/react-dom.production.min.js"></script>
+<script>
+    const root = document.getElementById("root");
+    const h3 = React.createElement(
+        "h3",
+        // { id: "sexy-span", style : {color: "pink"}},
+        {
+            onMouseEnter: () => console.log("mouse enter")
+        },
+        "Hello React!");
+    const btn = React.createElement("button", {
+        onClick: () => console.log("im clicked"),
+        style: {
+            backgroundColor : "tomato"
+        }
+    }, "Click me")
+    const container = React.createElement("div", null, [h3, btn])
+    // render : React element를 가지고 HTML로 만들어 배치한다는 의미 
+    ReactDOM.render(container, root);
+</script>
+
+</html>
+
+<!-- vanilla JS 는 HTML을 만들고 JS를 생성하지만 리액트는 JS를 만들고 HTML을 생성한다 -->
