@@ -1,5 +1,6 @@
 {
   "dependencies": {
     "@babel/standalone": "^7.25.0"
-  }
+  },
+  "homepage": "https://jyundev.github.io/"
 }

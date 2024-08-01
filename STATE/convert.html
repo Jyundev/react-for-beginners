@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <div id="root"></div>
+</body>
+
+<!-- react를 development모드로 사용한다면
+버그가 발생할수있는 코드에대한 좀더 꼼꼼한 피드백이
+편집기로부터 제공됩니다.
+ -->
+
+<!-- react를 production 모드로 사용하면 편집기 에러 메시지가 줄어듭니다. -->
+<script src="https://www.unpkg.com/react@18.3.1/umd/react.development.js"></script>
+<script src="https://unpkg.com/react-dom@18.3.1/umd/react-dom.development.js"></script>
+<script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+<script type="text/babel">
+    const root = document.getElementById("root");
+    function App() {
+        const [amount, setAmount] = React.useState(0);
+        const [isInvert, setInvert] = React.useState(false);
+        const onChange = (event) => {
+            setAmount(event.target.value)
+        }
+        const onReset = () =>  setAmount(0);
+        const onInvert = () => {
+            onReset()
+            setInvert((current) => !current);
+        }
+
+        return (
+            <div>
+                <h1>Super Convert</h1>
+                <div>
+                    <label htmlFor="minutes">Minutes</label>
+                    <input
+                    value={isInvert? amount * 60: amount}
+                    id="minutes"
+                        placeholder="Minutes"
+                        type="number"
+                        onChange={onChange}
+                        disabled = {isInvert === true}
+
+                    />
+                </div>
+                <div>
+                    <label htmlFor="hours" >Hours</label>
+                    <input
+                        value={isInvert? amount : Math.round(amount / 60)}
+                        id="hours"
+                        placeholder="Hours"
+                        type="number"
+                        onChange={onChange}
+                        disabled = {isInvert === false}
+                    />
+                </div>
+                <button onClick={onReset}>reset</button>
+                <button onClick={onInvert}>invert : {String(isInvert)}</button>
+
+            </div>
+        );
+    }
+    const rootElement = ReactDOM.createRoot(root);
+    rootElement.render(<App />);
+
+</script>
+
+</html>
