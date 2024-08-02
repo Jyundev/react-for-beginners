@@ -14,37 +14,37 @@
 <script src="https://www.unpkg.com/react@18.3.1/umd/react.development.js"></script>
 <script src="https://unpkg.com/react-dom@18.3.1/umd/react-dom.development.js"></script>
 <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+<script src="https://unpkg.com/prop-types@15.6/prop-types.js"></script>
+
 <script type="text/babel">
     // 함수형 component
-    function Btn(props) { //}{args}도 가능
+    function Btn({fontSize = 32, text }) { //{args}도 가능
         return (
             <button
-                style={props.style}
-                onClick = {props.onClick}
-            >
-            {props.text}
-            </button>
-        );
-    }
-    // Props가 변경된 컴포넌트만 render
-    const MemorizedBtn = React.memo(Btn)
-    function App() {
-        const [value, setValue] = React.useState("Save Changes");
-        const changeValue = () => setValue("Revert Changes");
-        return (
-            <div>
-                <MemorizedBtn style={{
+            style={{
                     color: "green",
                     backgroundColor: "tomata",
                     padding: "10px 20px",
                     border: 0,
-                    borderRadius: 10
+                    borderRadius: 10,
+                    fontSize
                 
-                }} text={value} 
-                onClick={changeValue}
-                big
-                />
-                <MemorizedBtn text="Continue"/>
+                }}
+            >
+            {text}
+            </button>
+        );
+    }
+    Btn.propTypes = {
+        text: PropTypes.string.isRequired,
+        fontSize: PropTypes.number
+    }
+    function App() {
+        return (
+            <div>
+                <Btn text = "Save Changes" fontSize={18}/>
+                <Btn text = "Save Changes"/>
+
             </div>
         );
     }
